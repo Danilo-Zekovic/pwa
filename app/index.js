@@ -9,5 +9,5 @@ const App = () => (
 
 render(
   <App />,
-  document.getElementById('react'),
+  document.getElementById('main'),
 );
