@@ -1,25 +1,36 @@
-import fs from 'fs'
+/*import fs from 'fs'
 import http from 'http'
 import https from 'https'
 import express from 'express'
 import path from 'path'
 import cors from 'cors'
 import compression from 'compression'
-import bodyParser from 'body-parser'
+import bodyParser from 'body-parser'*/
+var fs = require('fs'),
+  http = require('http'),
+  https = require('https'),
+  express = require('express'),
+  path = require('path'),
+  cors = require('cors'),
+  compression = require('compression'),
+  bodyParser = require('body-parser')
 
-const app = express(),
+// should be const in es6
+var app = express(),
   router = express.Router(),
   privateKey = fs.readFileSync(),
   certificate = fs.readFileSync('/home/danilo'),
   options = {key:privateKey, cert:certificate}
 
 
-const server = https.createServer(options, app)
+var server = https.createServer(options, app)
 
 app.use(compression())
 
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
+
+app.use('/', router)
 
 app.use(express.static(path.join(__dirname, '/public')))
 
