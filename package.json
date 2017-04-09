@@ -10,7 +10,9 @@
   "author": "Danilo Zekovic",
   "license": "MIT",
   "dependencies": {
+    "body-parser": "^1.17.1",
     "compression": "^1.6.2",
+    "cors": "^2.8.3",
     "express": "^4.15.2",
     "fs": "0.0.1-security",
     "react": "^15.4.2",
