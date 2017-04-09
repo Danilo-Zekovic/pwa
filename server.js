@@ -9,8 +9,8 @@ import bodyParser from 'body-parser'
 
 const app = express(),
   router = express.Router(),
-  privateKey = fs.readFileSync(),
-  certificate = fs.readFileSync('/home/danilo'),
+  privateKey = fs.readFileSync('/etc/letsencrypt/live/pwa.danilozekovic.com/privkey.pem'),
+  certificate = fs.readFileSync('/etc/letsencrypt/live/pwa.danilozekovic.com/fullchain.pem'),
   options = {key:privateKey, cert:certificate}
 
 
