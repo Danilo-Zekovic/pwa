@@ -22,15 +22,29 @@ var app = express(),
   certificate = fs.readFileSync('/etc/letsencrypt/live/pwa.danilozekovic.com/fullchain.pem'),
   options = {key:privateKey, cert:certificate}
 
+// redirect all http requests to https
+http.createServer(function(req, res) {
+  res.writeHead(301, {'Location':'https://' + req.headers['host'] + req.url });
+  res.end();
+}).listen(80);
+
 
 var server = https.createServer(options, app)
 
+// compress outbound service
 app.use(compression())
+
+// cors allows fetching images on local-hosted server
+// app.use(cors())
 
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
 app.use('/', router)
+
+router.get('*', function(req, res){
+  res.sendFile('index.html');
+})
 
 app.use(express.static(path.join(__dirname, '/public')))
 
