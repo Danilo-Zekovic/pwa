@@ -1,16 +1,29 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 
 const Home = () => (
   <h2>Home</h2>
 )
 
 const Roster = () => (
-  <h2>Roster</h2>
+  <div>
+    <h2>This is the Marina page!</h2>
+    <Switch>
+      <Route exact path='/roster' component={FullRoster}/>
+      <Route path='/roster/:number' component={Player}/>
+    </Switch>
+  </div>
 )
 
 const Schedule = () => (
   <h2>Schedule</h2>
+)
+
+const FullRoster = () => (
+  <Link to={'/roster/Mava Mavina'}>Mandarina</Link>
+)
+const Player = ( props ) => (
+  <h2>{props.match.params.number}</h2>
 )
 
 const Main = () => (
