@@ -1,3 +1,7 @@
+# Directory created by webpack for production
+# It should contain index.html and bundle.js
+public
+
 # Logs
 logs
 *.log
