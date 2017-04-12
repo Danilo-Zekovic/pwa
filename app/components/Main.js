@@ -1,36 +1,20 @@
 import React from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
+import Marina from './elements/Marina'
 
 const Home = () => (
   <h2>Home</h2>
-)
-
-const Roster = () => (
-  <div >
-    <h2>This is the Marina page!</h2>
-    <Switch>
-      <Route exact path='/roster' component={FullRoster}/>
-      <Route path='/roster/:name' component={Player}/>
-    </Switch>
-  </div>
 )
 
 const Schedule = () => (
   <h2>Schedule</h2>
 )
 
-const FullRoster = () => (
-  <Link to={'/roster/Mava Mavina'}>Mandarina</Link>
-)
-const Player = ( props ) => (
-  <h2>{props.match.params.name}</h2>
-)
-
 const Main = () => (
   <main style={{marginTop:69 + 'px'}}>
     <Switch>
       <Route exact path='/' component={Home}/>
-      <Route path='/roster' component={Roster}/>
+      <Route path='/roster' component={Marina}/>
       <Route path='/schedule' component={Schedule}/>
     </Switch>
   </main>
