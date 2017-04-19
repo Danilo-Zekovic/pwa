@@ -13,7 +13,8 @@ var fs = require('fs'),
   path = require('path'),
   cors = require('cors'),
   compression = require('compression'),
-  bodyParser = require('body-parser')
+  bodyParser = require('body-parser'),
+  configRoutes = require('./server/routes.js')
 
 // should be const in es6
 var app = express(),
@@ -40,6 +41,7 @@ app.use(compression())
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
+configRoutes(router, sserver)
 app.use('/', router)
 
 app.use(express.static(path.join(__dirname, '/public')))

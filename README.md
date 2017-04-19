@@ -24,4 +24,11 @@ options:
   start     -->  start SCRIPT as a daemon    
   stop      -->  stop the daemon SCRIPT    
   stopall   -->  stop all running forever scripts    
-  list      -->  list all running forever scripts    
+  list      -->  list all running forever scripts  
+
+
+## MongoDB
+sudo systemctl start mongod    
+sudo systemctl stop mongod      
+sudo systemctl reload mongod     
+sudo systemctl restart mongod       
