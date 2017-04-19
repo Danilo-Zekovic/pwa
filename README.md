@@ -7,21 +7,21 @@ I was thinking of modifying existing templates for react app, but after some thi
  how to build PWAs.
 
 ## Running the app
-To run webpack dev server:
+To run webpack dev server:   
   npm start
 
-To create a bundle:
+To create a bundle:   
   npm run build
 
-To run server after bundle is made:
+To run server after bundle is made:   
   node server.js
 
 
 ## Forever
- usage: forever [start | stop | stopall | list] [options] SCRIPT [script options]
+ usage: forever [start | stop | stopall | list] [options] SCRIPT [script options]    
 
-options:
-  start          start SCRIPT as a daemon
-  stop           stop the daemon SCRIPT
-  stopall        stop all running forever scripts
-  list           list all running forever scripts
+options:   
+  start     -->  start SCRIPT as a daemon    
+  stop      -->  stop the daemon SCRIPT    
+  stopall   -->  stop all running forever scripts    
+  list      -->  list all running forever scripts    
