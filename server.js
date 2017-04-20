@@ -1,12 +1,12 @@
-/*import fs from 'fs'
+import fs from 'fs'
 import http from 'http'
 import https from 'https'
 import express from 'express'
 import path from 'path'
 import cors from 'cors'
 import compression from 'compression'
-import bodyParser from 'body-parser'*/
-var fs = require('fs'),
+import bodyParser from 'body-parser'
+/*var fs = require('fs'),
   http = require('http'),
   https = require('https'),
   express = require('express'),
@@ -14,10 +14,10 @@ var fs = require('fs'),
   cors = require('cors'),
   compression = require('compression'),
   bodyParser = require('body-parser'),
-  configRoutes = require('./server/routes.js')
+  configRoutes = require('./server/routes.js')*/
 
 // should be const in es6
-var app = express(),
+const app = express(),
   router = express.Router(),
   privateKey = fs.readFileSync('/etc/letsencrypt/live/pwa.danilozekovic.com/privkey.pem'),
   certificate = fs.readFileSync('/etc/letsencrypt/live/pwa.danilozekovic.com/fullchain.pem'),
@@ -30,7 +30,7 @@ http.createServer(function(req, res) {
 }).listen(80);
 
 
-var server = https.createServer(options, app)
+const server = https.createServer(options, app)
 
 // compress outbound service
 app.use(compression())
@@ -41,7 +41,7 @@ app.use(compression())
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 
-configRoutes(router, sserver)
+configRoutes(router, server)
 app.use('/', router)
 
 app.use(express.static(path.join(__dirname, '/public')))
