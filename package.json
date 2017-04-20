@@ -4,12 +4,14 @@
   "description": "building pwa from scratch",
   "main": "index.js",
   "scripts": {
-    "production": "webpack -p",
-    "start": "webpack-dev-server"
+    "start":"node index.js",
+    "build": "webpack -p",
+    "test": "webpack-dev-server"
   },
   "author": "Danilo Zekovic",
   "license": "MIT",
   "dependencies": {
+    "babel-register": "^6.24.1",
     "body-parser": "^1.17.1",
     "compression": "^1.6.2",
     "cors": "^2.8.3",

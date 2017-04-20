@@ -8,13 +8,13 @@ I was thinking of modifying existing templates for react app, but after some thi
 
 ## Running the app
 To run webpack dev server:   
-  npm start
+  npm test
 
 To create a bundle:   
   npm run build
 
 To run server after bundle is made:   
-  node server.js
+  npm start
 
 
 ## Forever
