@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "dev":"node index-local.js",
     "build": "webpack -p",
     "test": "webpack-dev-server"
   },
