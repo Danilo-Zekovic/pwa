@@ -4,7 +4,7 @@
   "description": "building pwa from scratch",
   "main": "index.js",
   "scripts": {
-    "start":"node index.js",
+    "start": "node index.js",
     "build": "webpack -p",
     "test": "webpack-dev-server"
   },
@@ -17,10 +17,12 @@
     "cors": "^2.8.3",
     "express": "^4.15.2",
     "fs": "0.0.1-security",
+    "nedb": "^1.8.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^4.0.0",
-    "react-router-dom": "^4.0.0"
+    "react-router-dom": "^4.0.0",
+    "web-push": "^3.2.2"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",
