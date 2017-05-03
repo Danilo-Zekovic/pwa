@@ -1,22 +1,9 @@
 import React from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
-import Marina from './elements/Marina'
-import Home from './elements/Home'
-import Setup from './elements/Setup'
-import Subscribe from './elements/Subscribe'
-
-// Check for service worker
-if ('serviceWorker' in navigator) {
-  console.log("<<<< Service Worker exists >>>>")
-  navigator.serviceWorker.register('/sw.js').then(function(registration) {
-    // Registration was successful
-    console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    console.log('Hey this is awesome app!');
-  }).catch(function(err) {
-    // registration failed s
-    console.log('ServiceWorker registration failed: ', err);
-  });
-}
+import Marina from './views/Marina'
+import Home from './views/Home'
+import Setup from './views/Setup'
+import Subscribe from './views/Subscribe'
 
 const Main = () => (
   <main style={{marginTop:69 + 'px'}} className='container'>
