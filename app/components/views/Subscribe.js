@@ -70,6 +70,7 @@ function subscribeBtn(props) {
     <button disabled className="btn btn-primary js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
       onClick = {props.onClick}
       >
+      foo
       {props.value}
     </button>
   );
@@ -97,9 +98,10 @@ class Subscribe extends React.Component {
     });
   }
 
-  render{
+  render(){
     return(
       <div>
+        <h2>Subscribe PWA</h2>
         <subscribeBtn onClick={i => this.handleClick(i)}/>
       </div>
     )
