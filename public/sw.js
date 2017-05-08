@@ -30,7 +30,7 @@ self.addEventListener('push', event => {
     console.log('[Service Worker] Push Received.');
     console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
 
-    const title = 'Scene History';
+    const title = 'PWA';
     const options = {
       body: thisMessage,
       // icon: 'images/icon.png',
