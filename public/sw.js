@@ -22,3 +22,30 @@ self.addEventListener('fetch', function(event) {
     })
   );
 });
+
+// Copied from https://developers.google.com/web/fundamentals/engage-and-retain/push-notifications/good-notification
+self.addEventListener('push', event => {
+  let thisMessage = event.data.text()
+    console.log("We got this message: " + thisMessage)
+    console.log('[Service Worker] Push Received.');
+    console.log(`[Service Worker] Push had this data: "${event.data.text()}"`);
+
+    const title = 'Scene History';
+    const options = {
+      body: thisMessage,
+      // icon: 'images/icon.png',
+      // badge: 'images/badge.png'
+    };
+
+    event.waitUntil(self.registration.showNotification(title, options));
+  })
+
+  self.addEventListener('notificationclick', function(event) {
+  console.log('[Service Worker] Notification click Received.');
+
+  event.notification.close();
+
+  event.waitUntil(
+    clients.openWindow('https://pwa.danilozekovic.com')
+  )
+})
