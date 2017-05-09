@@ -19,7 +19,6 @@ const Header = () => (
           <ul className="nav navbar-nav">
             <li><Link to='/'>Home</Link></li>
             <li><Link to='/notifications'>Notifications</Link></li>
-            <li><Link to='/setup'>Setup</Link></li>
             <li><Link to='/subscribe'>Subscribe</Link></li>
           </ul>
         </div>

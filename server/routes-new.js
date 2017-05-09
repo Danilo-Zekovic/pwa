@@ -8,7 +8,7 @@
 import webPush from 'web-push'
 
 // Set of possible notification classes
-const notifyGroups = ["watch", "warning", "closure", "amber", "police"]
+const notifyGroups = ["basketball", "soccer", "baseball", "football", "hockey"]
 
 
 let savedSubscription = null,
@@ -26,21 +26,26 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   })
 
+  router.get('/notifications', function(req, res) {
+    console.log('Server notifications chosen')
+    res.sendFile('index.html', options)
+  })
+
   // These repetitive routes need abstracting
   /*router.get('/setup', function(req, res) {
     console.log('Server setup chosen')
     res.sendFile('index.html', options)
   })*/
 
-  router.get('/subscription', function(req, res) {
+  /*router.get('/subscription', function(req, res) {
     console.log('Server subscription chosen')
     res.sendFile('index.html', options)
-  })
+  })*/
 
-  router.get('/marina*', function(req, res) {
+  /*router.get('/marina*', function(req, res) {
     console.log('Server marina chosen')
     res.sendFile('index.html', options)
-  })
+  })*/
 
   /* Not going to allow server loading until the async thing is figured out
   router.get('/subscribe', function(req, res) {

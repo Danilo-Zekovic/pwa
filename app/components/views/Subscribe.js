@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import Select from 'react-select'
 
 // This variable currently not used
-const notifyGroups = ["watch", "warning", "closure", "amber", "police"]
+const notifyGroups = ["basketball", "soccer", "baseball", "football", "hockey"]
 
 // Current values of selected notify tags
 var tagValues = ""
@@ -12,11 +12,11 @@ var tagValues = ""
 // Config for react-select component for notify categories
 // In the world of ag, "markets, weather, sensors, legal, technical"
 var options = [
-  { value: 'watch', label: 'Weather Watch' },
-  { value: 'warning', label: 'Weather Warning' },
-  { value: 'closure', label: 'School Closure' },
-  { value: 'amber', label: 'Amber Alert' },
-  { value: 'police', label: 'Law Enforcement Notice' },
+  { value: 'basketball', label: 'Basketball' },
+  { value: 'soccer', label: 'Soccer' },
+  { value: 'baseball', label: 'Baseball' },
+  { value: 'football', label: 'Football' },
+  { value: 'hockey', label: 'Hockey' },
 ];
 
 // Wrap an HTML button into a subscribe buttoncomponent
