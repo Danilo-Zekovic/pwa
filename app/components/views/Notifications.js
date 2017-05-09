@@ -1,7 +1,7 @@
 import React from 'react'
 
 //const baseUrl = "http://localhost:3000/sknnzix/"
-const baseUrl = "https://pwa.danilozekovic.com/sknnzix"
+const baseUrl = "https://pwa.danilozekovic.com/sknnzix/"
 
 function buildUrl(message, tag, callback){
   console.log(message, "<<<< MESSAGE >>>>");
