@@ -1,13 +1,197 @@
-import React from 'react'
+// Module to handle push-notify subscriptions
+import React from "react"
+import { Link } from "react-router-dom"
+import Select from 'react-select'
 
-/*const applicationServerPublicKey = 'BAJyqorVg8OWJwiRJnz7A2CDFFstpXsyt8m0P3MQPCIxx1PgREuRqt-4lyVDy26rQF0njxQGkzK4aF_sjoooFGM'
+// This variable currently not used
+const notifyGroups = ["basketball", "soccer", "baseball", "football", "hockey"]
 
-let pushButton = document.querySelector('.js-push-btn');
-var pushSuported = false;
+// Current values of selected notify tags
+var tagValues = ""
 
-var isSubscribed = false;
-var swRegistration = null;
+// Config for react-select component for notify categories
+// In the world of ag, "markets, weather, sensors, legal, technical"
+var options = [
+  { value: 'basketball', label: 'Basketball' },
+  { value: 'soccer', label: 'Soccer' },
+  { value: 'baseball', label: 'Baseball' },
+  { value: 'football', label: 'Football' },
+  { value: 'hockey', label: 'Hockey' },
+];
 
+// Wrap an HTML button into a subscribe buttoncomponent
+const buttonStyle = {
+  margin: '10px 10px 10px 0'
+}
+
+const SubscribeButton = React.createClass({
+  getInitialState: function() {
+    // Set button label appropriately (isSubscribed is global to app)
+    console.log('Init Current state of isSubscribed: ' + isSubscribed)
+    let label = isSubscribed?'Unsubscribe':'Subscribe'
+
+    //
+    let initValues = {
+      label: label,
+      enabled: true
+      }
+    return initValues
+  },
+  componentDidMount: function() {
+    console.log('Mount curent state of isSubscribed: ' + isSubscribed)
+    let label = isSubscribed?'Unsubscribe':'Subscribe'
+    this.setState({label: label})
+  },
+  // Click handler for Subscribe button
+  updateBtn: function () {
+    if (isSubscribed) {
+      console.log('Tag values: ' + tagValues)
+        unsubscribeUser()
+        this.setState({label: 'Subscribe'})
+    } else {
+      // Don't subscribe if no notify groups chosen
+      if (tagValues || (tagValues.length != 0)) {
+        subscribeUser()
+        this.setState({label: 'Unsubscribe'})
+        }
+    }
+  },
+  render: function () {
+    return (
+      <button
+        className="btn btn-primary js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+        style={buttonStyle}
+        onClick={this.updateBtn}>{this.state.label}</button>
+    )
+  }
+})
+
+// Render composite component - Select widget + Subscribe Button
+export default React.createClass ( {
+  componentDidMount: function() {
+    if (tagValues.length > 0 ) {
+      // These are the topics currently subscribed
+      console.log('We should tell the user about tags ' + tagValues)
+      tagValues = ""
+      }
+  },
+  // Configure and post react-select component
+  displayName: 'MultiSelectField',
+	propTypes: {
+		label: React.PropTypes.string,
+	},
+	getInitialState () {
+		return {
+			disabled: false,
+			crazy: false,
+			options: options,
+			value: [],
+		};
+	},
+  // Called for each select/deselect of a topic
+	handleSelectChange (value) {
+		this.setState({ value },function(){
+      tagValues = this.state.value
+      console.log('Value = ' + this.state.value + ' ' + JSON.stringify(tagValues))
+    })
+	},
+  render() {
+    return (
+      <div>
+        <h3><center>Let's pretend to be a public service site!</center></h3>
+        <Select multi simpleValue disabled={this.state.disabled} value={this.state.value} placeholder="Select notifications" options={this.state.options} onChange={this.handleSelectChange} />
+        <center>
+        <SubscribeButton
+          />
+        </center>
+      </div>
+    )
+  }
+})
+
+// Service routines to handle subscription activities
+function subscribeUser() {
+  const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+  swRegistration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: applicationServerKey
+  })
+  .then(function(subscription) {
+    console.log('User is subscribed.');
+    updateSubscriptionOnServer(subscription);
+    isSubscribed = true;
+    // updateBtn();
+  })
+  .catch(function(err) {
+    // We need to disable the SubscribeButton here
+    console.log('Failed to subscribe the user: ', err);
+    // updateBtn();
+  });
+}
+
+function unsubscribeUser() {
+  swRegistration.pushManager.getSubscription()
+  .then(function(subscription) {
+    if (subscription) {
+      return subscription.unsubscribe();
+    }
+  })
+  .catch(function(error) {
+    console.log('Error unsubscribing', error);
+  })
+  .then(function() {
+    // Should this be uncommented?
+    // updateSubscriptionOnServer(null);
+    console.log('User is unsubscribed.');
+    isSubscribed = false;
+    // tagValues = ""
+
+
+    // updateBtn();
+  });
+}
+
+// Process fresh subscription
+function updateSubscriptionOnServer(subscription) {
+// Only talk to server if we have a subscription object
+if (subscription) {
+  sendSubscriptionToBackEnd(subscription)
+  }
+}
+
+// Service routine to contact our speciic server
+function sendSubscriptionToBackEnd(subscription) {
+  // Convert the subscription to a simple object
+  let bodyObject = subscription.toJSON()
+
+  // Add selected tags to request object
+  let tagList = { tags: tagValues.split(',') }
+  bodyObject = Object.assign({}, bodyObject, tagList)
+  console.log('Body object: ' + JSON.stringify(bodyObject))
+
+  return fetch('/save-subscription/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(bodyObject)
+  })
+  .then(function(response) {
+    if (!response.ok) {
+      throw new Error('Bad status code from server.');
+    }
+    // console.log('Subscribe response: ' + JSON.stringify(reponse.data))
+    return response.json();
+  })
+  .then(function(responseData) {
+    if (!(responseData.data && responseData.data.success)) {
+      throw new Error('Bad response from server.');
+    }
+    console.log(JSON.stringify(responseData.data))
+  });
+}
+
+// Service routine to create Uint8 array for subscribe
 function urlB64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - base64String.length % 4) % 4);
   const base64 = (base64String + padding)
@@ -21,139 +205,27 @@ function urlB64ToUint8Array(base64String) {
     outputArray[i] = rawData.charCodeAt(i);
   }
   return outputArray;
-}*/
-
-/*function updateBtn() {
-  if (isSubscribed) {
-    pushButton.textContent = 'Disable Push Messaging';
-  } else {
-    pushButton.textContent = 'Enable Push Messaging';
-  }
-
-  pushButton.disabled = false;
-}*/
-
-/*function initialiseUI(swRegistration) {
-  //pushButton.disabled = false;
-  // Set the initial subscription value
-  swRegistration.pushManager.getSubscription()
-  .then(function(subscription) {
-    isSubscribed = !(subscription === null);
-
-    if (isSubscribed) {
-      console.log('User IS subscribed.');
-    } else {
-      console.log('User is NOT subscribed.');
-    }
-
-    //updateBtn();
-  });
 }
 
-// Check for service worker
-if ('serviceWorker' in navigator && 'PushManager' in window) {
-  console.log("<<<< Service Worker exists >>>>")
-  pushSuported = true;
-  navigator.serviceWorker.register('/sw.js').then(function(registration) {
-    // Registration was successful
-    console.log('ServiceWorker registration successful with scope: ', registration);
-    swRegistration = registration;
-    //initialiseUI();
-  }).catch(function(err) {
-    // registration failed s
-    console.log('ServiceWorker registration failed: ', err);
-  });
-}else{
-  console.warn('Push messaging is not supported');
-  //pushButton.textContent = 'Push Not Supported';
-}*/
+function wasteLand() {
+  // Code I might need and am keeping for safety
 
-// should be loaded into subscribeBtn
-// it should change its text when clicked
-// right now does not even show up
-/*function SubscribeBtn(props) {
-  return (
-    <button disabled className="btn btn-primary js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-      onClick = {this.props.onClick}
-      style="width:40px"
-      >
-      {this.props.value}
-    </button>
-  );
-}*/
+  // "Custom" groupings; for now just one chosen at random
+  // ["watch", "warning", "closure", "amber, "police"]
+  let value = Math.floor(Math.random() * 5)
+  console.log('Random group value: ' + value)
+  let tag = notifyGroups[value]
+  console.log('Picked tag: ' + tag)
+  let tagList = { tags: [tag] }
+}
 
-//
-/*class Subscribe extends React.Component {
-
-  constructor() {
-    super();
-    this.state = {
-      btnDisabled:true,
-      btnText:'Enable Push Messaging',
-      registration:swRegistration,
-      isSubscribed:isSubscribed
-    };
-  }
-
-  updateBtn () {
-    let text = isSubscribed ? 'Disable Push Messaging':'Enable Push Messaging'
-    this.setState({
-      btnText:text
-
-    });
-  }
-
-  disabledBtn (){
-    console.log(this.state.btnDisabled, "<<<< btnDisabled >>>>")
-    this.setState({
-      btnDisabled:pushSuported ? false:true
-      //btnText:pushSuported ? this.:
-    })
-  }
-
-  setSubscribe(val){
-    setState({isSubscribed:val})
-  }
-
-  componentDidMount(){
-    let btn = {}
-    btn['btnDisabled'] = pushSuported ? false:true
-    if (!pushSuported){
-      btn['btnText'] = 'Push Not Supported'
-    }
-    this.setState(btn)
-  }
-
-  render(){
-    initialiseUI(this.state.registration)
-
-    return(
-      <div>
-        <h2>Subscribe PWA</h2>
-        <button onClick={this.updateBtn.bind(this)}
-          disabled={this.state.btnDisabled ? true:false}
-          className="btn btn-primary js-push-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-          >{this.state.btnText}</button>
-
-
-
-      </div>
-    )
-  }
-}*/
-// <button onClick={this.disabledBtn.bind(this)}>{this.state.btnDisabled ? 'true':'false'}</button>
-/* <SubscribeBtn
-  onClick={this.updateBtn.bind(this)}
-  disabled={this.state.btnDisabled ? true:false}
-  value={this.state.btnText}/>*/
-
-class Subscribe extends React.Component {
+/*class Setup extends React.Component {
   render(){
     return(
       <div>
-        <h2>Subscribe PWA</h2>
+        <h2>PWA</h2>
       </div>
     )
   }
 }
-export default Subscribe
+export default Setup*/

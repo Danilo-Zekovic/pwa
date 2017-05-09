@@ -3,8 +3,8 @@ import React from 'react'
 const Home = () => (
   <div>
     <h1>Welcome to PWA Session</h1>
-    <h3>Learn How To Build One</h3>
-    <p>Step one you have to want it. Step two, COMING SOON!</p>
+    <h2>Learn How To Build One</h2>
+    <h4 href="https://github.com/Danilo-Zekovic/pwa">Clone this project from GitHub</h4>
   </div>
 )
 
