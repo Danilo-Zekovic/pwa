@@ -75,7 +75,7 @@ sudo systemctl restart mongod
 ## Get and Imbed VAPID Keys
 1. create keys: web-push generate-vapid-keys
 2. copy the key values
-3. In file routes.js replace publicKey and privateKey with generated values
+3. In file routes-new.js (will be changed to routes.js in future) replace publicKey and privateKey with generated values
 4. Also, change the email to match email that you hae access to
 5. replace applicationServerPublicKey in ./public/scripts/push.js with the value of the publicKey
 
