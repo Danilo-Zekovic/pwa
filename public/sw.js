@@ -6,7 +6,9 @@ var urlsToCache = [
   '/css/react-select.css',
   '/scripts/push.js'
 ];
+
 self.addEventListener('install', function(event) {
+  // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
@@ -20,6 +22,7 @@ self.addEventListener('fetch', function(event) {
   console.log(event.request.url);
   event.respondWith(
     caches.match(event.request).then(function(response) {
+      // Cache hit - return response
       return response || fetch(event.request);
     })
   );

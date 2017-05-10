@@ -1,8 +1,11 @@
 import React from 'react'
 
+// TODO comment and uncomment depending where do you runn it
+// change baseUrl to your domain
 //const baseUrl = "http://localhost:3000/sknnzix/"
 const baseUrl = "https://pwa.danilozekovic.com/sknnzix/"
 
+// retruns the url where to make the ajax call to
 function buildUrl(message, tag, callback){
   console.log(message, "<<<< MESSAGE >>>>");
   let url = ''
@@ -15,10 +18,10 @@ function buildUrl(message, tag, callback){
   }
 
   console.log(url, "<<<< URL >>>>");
-
   callback(url)
 }
 
+// sends the message to server, where it gets pushed to subscribers as push notification
 function ajaxCall (message, tag) {
   console.log(message, "<<<< ABOUT TO MAKE AJAX CALL >>>>");
   let xhttp;
@@ -105,7 +108,7 @@ class Notifications extends React.Component {
           </textarea>
         </div>
 
-        <p onChange={this.setSent}>{this.state.sent}</p>
+        <p>{this.state.sent}</p>
 
         <button className="btn btn-primary" onClick={this.pushNotification}>Send</button>
 

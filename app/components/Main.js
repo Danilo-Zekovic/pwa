@@ -5,7 +5,7 @@ import Subscribe from './views/Subscribe'
 import Notifications from './views/Notifications'
 import News from './views/News'
 
-
+// client side routes 
 const Main = () => (
   <main style={{marginTop:69 + 'px'}} className='container'>
     <Switch>

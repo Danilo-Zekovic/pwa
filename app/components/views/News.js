@@ -1,5 +1,6 @@
 import React from 'react'
 
+// example news 
 const News = () => (
   <div>
     <h1>OFFICIAL POSTER COMPETITIONS FOR PYEONGCHANG 2018 LAUNCHED</h1><br/>
