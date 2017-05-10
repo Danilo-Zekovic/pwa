@@ -6,8 +6,8 @@ import path from 'path'
 import cors from 'cors'
 import compression from 'compression'
 import bodyParser from 'body-parser'
-//import configRoutes from './server/routes.js'
-import configRoutes from './server/routes-new.js'
+import configRoutes from './server/routes.js'
+
 /*var fs = require('fs'),
   http = require('http'),
   https = require('https'),
