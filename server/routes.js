@@ -31,6 +31,11 @@ export default function ( router, server ) {
     res.sendFile('index.html', options)
   })
 
+  router.get('/news', function(req, res) {
+    console.log('Server news chosen')
+    res.sendFile('index.html', options)
+  })
+
   // These repetitive routes need abstracting
   /*router.get('/setup', function(req, res) {
     console.log('Server setup chosen')

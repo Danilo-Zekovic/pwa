@@ -12,7 +12,7 @@ const Header = () => (
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <Link className="navbar-brand" to='/'>Brand</Link>
+          <Link className="navbar-brand" to='/'>PWA</Link>
         </div>
 
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

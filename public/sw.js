@@ -2,7 +2,9 @@
 var CACHE_NAME = 'my-pwa-cache-v1';
 var urlsToCache = [
   '/',
-  '/bundle.js'
+  '/bundle.js',
+  '/css/react-select.css',
+  '/scripts/push.js'
 ];
 self.addEventListener('install', function(event) {
   event.waitUntil(

@@ -47,7 +47,8 @@ class Notifications extends React.Component {
     super();
     this.state = {
       notification:"",
-      tag:""
+      tag:"",
+      sent:""
     };
     this.pushNotification = this.pushNotification.bind(this);
     this.setNotification = this.setNotification.bind(this);
@@ -58,6 +59,14 @@ class Notifications extends React.Component {
   pushNotification(){
     console.log(this.state.notification);
     ajaxCall(this.state.notification, this.state.tag)
+    this.setState({
+      sent:"Message sent!"
+    })
+    // clear this.state.sent after 4s
+    setTimeout(function(){
+      console.log("<<<< TIMEOUT >>>>");
+      this.setState({sent:''})
+    }.bind(this), 4000)
   }
 
   // set state.notification to match entered value
@@ -96,7 +105,10 @@ class Notifications extends React.Component {
           </textarea>
         </div>
 
+        <p onChange={this.setSent}>{this.state.sent}</p>
+
         <button className="btn btn-primary" onClick={this.pushNotification}>Send</button>
+
       </div>
     )
   }
