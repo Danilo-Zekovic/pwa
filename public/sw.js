@@ -23,7 +23,12 @@ self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request).then(function(response) {
       // Cache hit - return response
-      return response || fetch(event.request);
+      //return response || fetch(event.request);
+      if (response){
+        console.log("Returning cashed value for: " + event.request.url);
+        return response;
+      }
+      return fetch(event.request);
     })
   );
 });
