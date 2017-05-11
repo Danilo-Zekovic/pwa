@@ -12,11 +12,11 @@ var tagValues = ""
 // Config for react-select component for notify categories
 // In the world of ag, "markets, weather, sensors, legal, technical"
 var options = [
-  { value: 'basketball', label: 'Basketball' },
   { value: 'soccer', label: 'Soccer' },
-  { value: 'baseball', label: 'Baseball' },
+  { value: 'basketball', label: 'Basketball' },
   { value: 'football', label: 'Football' },
   { value: 'hockey', label: 'Hockey' },
+  { value: 'baseball', label: 'Baseball' },
 ];
 
 // Wrap an HTML button into a subscribe buttoncomponent
