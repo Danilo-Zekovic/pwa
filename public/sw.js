@@ -25,9 +25,10 @@ self.addEventListener('fetch', function(event) {
       // Cache hit - return response
       //return response || fetch(event.request);
       if (response){
-        console.log("Returning cashed value for: " + event.request.url);
+        console.log("Returning cached value for: " + event.request.url);
         return response;
       }
+      // No hit; fetch resource
       return fetch(event.request);
     })
   );
