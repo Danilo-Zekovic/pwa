@@ -120,12 +120,10 @@ function subscribeUser() {
     console.log('User is subscribed.');
     updateSubscriptionOnServer(subscription);
     isSubscribed = true;
-    // updateBtn();
   })
   .catch(function(err) {
-    // We need to disable the SubscribeButton here
     console.log('Failed to subscribe the user: ', err);
-    // updateBtn();
+
   });
 }
 
@@ -144,10 +142,6 @@ function unsubscribeUser() {
     // updateSubscriptionOnServer(null);
     console.log('User is unsubscribed.');
     isSubscribed = false;
-    // tagValues = ""
-
-
-    // updateBtn();
   });
 }
 
@@ -206,26 +200,3 @@ function urlB64ToUint8Array(base64String) {
   }
   return outputArray;
 }
-
-function wasteLand() {
-  // Code I might need and am keeping for safety
-
-  // "Custom" groupings; for now just one chosen at random
-  // ["watch", "warning", "closure", "amber, "police"]
-  let value = Math.floor(Math.random() * 5)
-  console.log('Random group value: ' + value)
-  let tag = notifyGroups[value]
-  console.log('Picked tag: ' + tag)
-  let tagList = { tags: [tag] }
-}
-
-/*class Setup extends React.Component {
-  render(){
-    return(
-      <div>
-        <h2>PWA</h2>
-      </div>
-    )
-  }
-}
-export default Setup*/
