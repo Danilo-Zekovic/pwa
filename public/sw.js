@@ -51,6 +51,6 @@ self.addEventListener('push', event => {
   event.notification.close();
 
   event.waitUntil(
-    clients.openWindow('https://pwa.danilozekovic.com')
+    clients.openWindow('https://www.oscon-pwa.net')
   )
 })
