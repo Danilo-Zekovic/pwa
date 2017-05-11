@@ -10,7 +10,7 @@ import React from 'react'
 // TODO comment and uncomment depending where do you run it
 // Change baseUrl to your domain
 // const baseUrl = "http://localhost:3000/sknnzix/"
-const baseUrl = "https://pwa.danilozekovic.com/sknnzix/"
+const baseUrl = "https://www.oscon-pwa.net/sknnzix/"
 
 // Build up URL
 function buildUrl(message, tag, callback){
