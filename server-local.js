@@ -9,6 +9,7 @@ import compression from 'compression'
 import bodyParser from 'body-parser'
 import configRoutes from './server/routes.js'
 
+import certificateKeys from './KEY_RING.js'
 
 // should be const in es6
 const app = express(),

@@ -6,6 +6,7 @@
 //import multer from 'multer'
 //import cb from 'cb'
 import webPush from 'web-push'
+import vapidKeys from '../KEY_RING.js'
 
 // Set of possible notification classes
 const notifyGroups = ["basketball", "soccer", "baseball", "football", "hockey"]
@@ -210,9 +211,9 @@ export default function ( router, server ) {
       if (subscription.tags.includes(messageType) || messageType == null) {
       const pushOptions = {
         vapidDetails: {
-          subject: 'mailto:danilozeka93@gmail.com',
-          publicKey: 'BAJyqorVg8OWJwiRJnz7A2CDFFstpXsyt8m0P3MQPCIxx1PgREuRqt-4lyVDy26rQF0njxQGkzK4aF_sjoooFGM',
-          privateKey: 'efx_7WzMG84FsdrU-38LzoB9WhE-U2zcWtNQiXzeGPs'
+          subject: 'mailto:' + vapidKeys.EMAIL,
+          publicKey: vapidKeys.PUBLIC_KEY,
+          privateKey: vapidKeys.PRIVATE_KEY
         },
       }
 

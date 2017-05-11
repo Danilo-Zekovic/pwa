@@ -8,21 +8,15 @@ import compression from 'compression'
 import bodyParser from 'body-parser'
 import configRoutes from './server/routes.js'
 
-/*var fs = require('fs'),
-  http = require('http'),
-  https = require('https'),
-  express = require('express'),
-  path = require('path'),
-  cors = require('cors'),
-  compression = require('compression'),
-  bodyParser = require('body-parser'),
-  configRoutes = require('./server/routes.js')*/
+import certificateKeys from './KEY_RING.js'
 
 // should be const in es6
 const app = express(),
   router = express.Router(),
-  privateKey = fs.readFileSync('/etc/letsencrypt/live/pwa.danilozekovic.com/privkey.pem'),
-  certificate = fs.readFileSync('/etc/letsencrypt/live/pwa.danilozekovic.com/fullchain.pem'),
+  //privateKey = fs.readFileSync('/etc/letsencrypt/live/pwa.danilozekovic.com/privkey.pem'),
+  //certificate = fs.readFileSync('/etc/letsencrypt/live/pwa.danilozekovic.com/fullchain.pem'),
+  privateKey = fs.readFileSync(certificateKeys.PRIVATE_KEY_PATH),
+  certificate = fs.readFileSync(certificateKeys.CERTIFICATE_PATH),
   options = {key:privateKey, cert:certificate}
 
 // redirect all http requests to https
