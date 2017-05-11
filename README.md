@@ -67,14 +67,14 @@ sudo systemctl restart mongod
 1. Instructions found https://certbot.eff.org/#centosrhel7-other, below is commnd you are looking for
 2. certbot certonly --standalone -d www.example.com
 3. Certificates are placed in /etc/letsencrypt/live/www.example.com/fullchain.pem
-4. /etc/letsencrypt/live/lkjhgfdsa.danilozekovic.com/privkey.pem
-5. In file ./server.js replace privateKey path with path to privkey.pem
-  and certificate path with path to fullchain.pem
+4. /etc/letsencrypt/live/www.example.com/privkey.pem
+5. In file KEY_RING.js replace PRIVATE_KEY_PATH with path to privkey.pem
+  and CERTIFICATE_PATH with path to fullchain.pem
 
 ## Get and Embed VAPID Keys
 1. Create keys: web-push generate-vapid-keys
 2. Copy the key values
-3. In file routes-new.js (will be changed to routes.js in future) replace publicKey and privateKey with generated values
+3. In file KEY_RING.js replace PUBLIC_KEY and PRIVATE_KEY with generated values
 4. Also, change the email to match email that you hae access to
 5. Replace applicationServerPublicKey in ./public/scripts/push.js with the value of the publicKey
 
