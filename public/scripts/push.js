@@ -19,7 +19,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
   .then(function(swReg) {
     console.log('Service Worker is registered', swReg);
     swRegistration = swReg
-    //initializeUI()
+
   })
   .catch(function(error) {
     console.error('Service Worker Error', error);
@@ -31,17 +31,7 @@ if ('serviceWorker' in navigator && 'PushManager' in window) {
 
 // Called after service worker installation
 function initializeUI() {
-  /* Fix button stuff later
-  pushButton = document.querySelector('.js-push-btn');
-  pushButton.addEventListener('click', function() {
-    pushButton.disabled = true;
-    if (isSubscribed) {
-      unsubscribeUser();
-    } else {
-      subscribeUser();
-    }
-  });
-  */
+
 
   Notification.requestPermission(function(status) {
     permStatus = status;
@@ -67,5 +57,5 @@ function initializeUI() {
     } else {
       console.log('User is NOT subscribed.');
     }
-    // updateBtn();
+    
 }
