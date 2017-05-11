@@ -44,11 +44,10 @@ sudo systemctl restart mongod
 
 ## Dependencies    
 1. Node, follow instructions at https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-a-centos-7-server
-2. nvm, install the latest node 7 and hier https://www.liquidweb.com/kb/how-to-install-nvm-node-version-manager-for-node-js-on-centos-7/
+2. Install the latest node 7 https://www.liquidweb.com/kb/how-to-install-nvm-node-version-manager-for-node-js-on-centos-7/
+3. Install git https://www.digitalocean.com/community/tutorials/how-to-install-git-on-centos-7
+4. Install web-push: `sudo npm install -g web-push`
 
-3. git https://www.digitalocean.com/community/tutorials/how-to-install-git-on-centos-7
-4. web-push, sudo npm install -g web-push
-5.
 
 ## Getting the Project
 1. git clone https://github.com/Danilo-Zekovic/pwa    
@@ -64,24 +63,24 @@ sudo systemctl restart mongod
 ## Domain
 1. Link a domain name to the IP of the server (domain-name)
 
-## Get and Imbed SSL Certificats
-0. instructions found https://certbot.eff.org/#centosrhel7-other, below is commnd you are looking for
-1. certbot certonly --standalone -d www.example.com
-2. Certificats are placed in /etc/letsencrypt/live/www.example.com/fullchain.pem
-2. /etc/letsencrypt/live/lkjhgfdsa.danilozekovic.com/privkey.pem
-3. In file ./server.js replace privateKey path with path to privkey.pem
-3. and certificate path with path to fullchain.pem
+## Get and Embed SSL Certificats
+1. Instructions found https://certbot.eff.org/#centosrhel7-other, below is commnd you are looking for
+2. certbot certonly --standalone -d www.example.com
+3. Certificates are placed in /etc/letsencrypt/live/www.example.com/fullchain.pem
+4. /etc/letsencrypt/live/lkjhgfdsa.danilozekovic.com/privkey.pem
+5. In file ./server.js replace privateKey path with path to privkey.pem
+  and certificate path with path to fullchain.pem
 
-## Get and Imbed VAPID Keys
-1. create keys: web-push generate-vapid-keys
-2. copy the key values
+## Get and Embed VAPID Keys
+1. Create keys: web-push generate-vapid-keys
+2. Copy the key values
 3. In file routes-new.js (will be changed to routes.js in future) replace publicKey and privateKey with generated values
 4. Also, change the email to match email that you hae access to
-5. replace applicationServerPublicKey in ./public/scripts/push.js with the value of the publicKey
+5. Replace applicationServerPublicKey in ./public/scripts/push.js with the value of the publicKey
 
 ## Forever
 1. sudo npm install forever -g
 2. sudo forever start index.js
-3. in the browser open https://your.domain.name
+3. In the browser open https://your.domain.name
 
-# Develope your own PWA and change the World
+# You're ready to develop your own PWA and change the world!!
