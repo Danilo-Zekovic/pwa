@@ -1,22 +1,33 @@
 import React from 'react'
 
-// TODO comment and uncomment depending where do you runn it
-// change baseUrl to your domain
-//const baseUrl = "http://localhost:3000/sknnzix/"
+/*
+  This is a control module to compose push notification for sending
+  Quick and dirty "Notifications Management" administrator page
+*/
+
+// baseURL points to module which sends push notifications
+
+// TODO comment and uncomment depending where do you run it
+// Change baseUrl to your domain
+// const baseUrl = "http://localhost:3000/sknnzix/"
 const baseUrl = "https://pwa.danilozekovic.com/sknnzix/"
 
-// retruns the url where to make the ajax call to
+// Build up URL
 function buildUrl(message, tag, callback){
   console.log(message, "<<<< MESSAGE >>>>");
   let url = ''
+
+  // Encode text for safe URL transmission
   let messageEncoded = encodeURI(message)
 
-  if(tag && tag != "all"){
+  // Determine whether to send to all "groups"
+  if (tag && tag != "all") {
     url = baseUrl + tag + '/' + messageEncoded
-  }else{
+  } else {
     url = baseUrl + messageEncoded
   }
 
+  // Log result
   console.log(url, "<<<< URL >>>>");
   callback(url)
 }
@@ -25,6 +36,8 @@ function buildUrl(message, tag, callback){
 function ajaxCall (message, tag) {
   console.log(message, "<<<< ABOUT TO MAKE AJAX CALL >>>>");
   let xhttp;
+
+  // Browser compat
   if (window.XMLHttpRequest){
     // modern browsers
     xhttp = new XMLHttpRequest();
@@ -33,7 +46,7 @@ function ajaxCall (message, tag) {
     xhttp = new ActiveXObject("Microsoft.XMLHTTP");
   }
 
-  // callback to get the correct url where ajax call will be made
+  // Put together URL and make request
   buildUrl(message, tag, function(res){
     console.log(res);
     // specify type of request (method, url, async)
@@ -41,8 +54,6 @@ function ajaxCall (message, tag) {
     // send request to server
     xhttp.send()
   })
-
-
 }
 
 class Notifications extends React.Component {
@@ -53,12 +64,13 @@ class Notifications extends React.Component {
       tag:"",
       sent:""
     };
+    // Bind functions for callbacks
     this.pushNotification = this.pushNotification.bind(this);
     this.setNotification = this.setNotification.bind(this);
     this.setTag = this.setTag.bind(this);
   }
 
-  // use ajax to send message to server
+  // Send composed message to server for dispatch
   pushNotification(){
     console.log(this.state.notification);
     ajaxCall(this.state.notification, this.state.tag)
