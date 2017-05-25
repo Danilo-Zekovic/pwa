@@ -4,8 +4,9 @@ import Home from './views/Home'
 import Subscribe from './views/Subscribe'
 import Notifications from './views/Notifications'
 import News from './views/News'
+import NotFoundPage from './views/NotFoundPage'
 
-// client side routes 
+// client side routes
 const Main = () => (
   <main style={{marginTop:69 + 'px'}} className='container'>
     <Switch>
@@ -13,6 +14,7 @@ const Main = () => (
       <Route path='/notifications' component={Notifications}/>
       <Route path='/subscribe' component={Subscribe}/>
       <Route path='/news' component={News}/>
+      <Route path="*" component={NotFoundPage}/>
     </Switch>
   </main>
 )
